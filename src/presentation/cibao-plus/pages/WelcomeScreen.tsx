@@ -2,33 +2,50 @@ import { Link } from 'react-router';
 import { StepperHeader } from '../components/StepperHeader';
 import { useState } from 'react';
 import Banner from "../assets/Banner.png"
+import { Footer } from '../components/Footer';
 
 export const WelcomeScreen = () => {
+
   const [selectedMethod, setSelectedMethod] = useState<'sms' | 'email' | null>(null);
 
   return (
 
-    <div className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
 
-      <section>
+      {/*================
+        HEADER SECTION
+      ===================*/}
+      <header>
         <img className='w-full h-auto object-cover' src={Banner} alt="banner" />
-      </section>
+      </header>
 
-      <main className="flex flex-col p-6 gap-8 bg-white">
+      {/*======================
+        MAIN CONTENT SECTION
+      =========================*/}
+      <section className="flex flex-col p-6 gap-8 bg-white">
 
+        {/*======================
+          STEP PROGRESS HEADER
+        =========================*/}
         <StepperHeader />
 
-        <section className="flex flex-col gap-2">
+        <article className="flex flex-col gap-2">
           <h1 className="font-aleo text-2xl font-semibold text-gray-800">
             Bienvenido Juan!
           </h1>
           <p className="font-aleo text-[16px] text-gray-600">
             Ahora indica el método de tu preferencia para validar tu identidad.
           </p>
-        </section>
+        </article>
 
-        <section className="flex flex-col gap-4">
+        {/*================================
+          SELECTION OF VALIDATION METHOD
+        ===================================*/}
+        <article className="flex flex-col gap-4">
 
+          {/*============
+            SMS OPTION
+          ===============*/}
           <button
             className={`
               border rounded-lg p-4 cursor-pointer transition-all duration-200 w-full text-left
@@ -62,6 +79,9 @@ export const WelcomeScreen = () => {
             </div>
           </button>
 
+          {/*==============
+            EMAIL OPTION
+          =================*/}
           <button
             className={`
               border rounded-lg p-4 cursor-pointer transition-all duration-200 w-full text-left
@@ -95,9 +115,16 @@ export const WelcomeScreen = () => {
             </div>
           </button>
 
-        </section>
+        </article>
 
-        <div className="flex gap-3 mt-8">
+        {/*====================
+          NAVIGATION BUTTONS
+        =======================*/}
+        <article className="flex gap-3 mt-8">
+
+          {/*=============
+            BACK BUTTON
+          ================*/}
           <Link to="/" className="flex-1">
             <button className="w-full border border-primary text-primary hover:bg-blue-50 font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2">
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,6 +134,9 @@ export const WelcomeScreen = () => {
             </button>
           </Link>
 
+          {/*=================
+            CONTINUE BUTTON
+          ====================*/}
           <Link
             to="/validate-otp"
             className={`flex-1 ${selectedMethod ? '' : 'pointer-events-none opacity-50'}`}
@@ -127,15 +157,16 @@ export const WelcomeScreen = () => {
               </svg>
             </button>
           </Link>
-        </div>
+          
+        </article>
 
-        <footer className="flex flex-col gap-2 mt-12 text-center text-xs text-gray-500">
-          <p>Asociación Cibao de Ahorros y Préstamos © 2026</p>
-          <p>Políticas de Privacidad | Entidad Autorizada SB</p>
-        </footer>
+        {/*================
+          FOOTER SECTION
+        ===================*/}
+        <Footer />
 
-      </main>
+      </section>
 
-    </div>
+    </main>
   );
 };

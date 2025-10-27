@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation } from 'react-router';
 
 interface Step {
@@ -14,11 +13,15 @@ const steps: Step[] = [
     { id: 4, name: 'Información', path: '/contact-employment-details' },
 ];
 
-export const StepperHeader: React.FC = () => {
+export const StepperHeader = () => {
+    
     const location = useLocation();
 
-    // Determinar el paso actual basado en la ruta
-    const getCurrentStep = () => {
+    /**================================================
+     * Determine the current step based on the route
+     * @returns {number}
+    ===================================================*/
+    const getCurrentStep = (): number => {
         const currentStep = steps.find(step => step.path === location.pathname);
         return currentStep ? currentStep.id : 1;
     };

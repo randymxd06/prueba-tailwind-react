@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import devicesImage from '../assets/Devices.png';
 import { useState } from 'react';
 import { formatCedula } from '../../helpers/formatCedula';
+import { Footer } from '../components/Footer';
 
 export const RequestCibaoPlusScreen = () => {
 
@@ -20,7 +21,7 @@ export const RequestCibaoPlusScreen = () => {
 
   return (
 
-    <div className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
 
       {/*================
         HEADER SECTION
@@ -53,20 +54,29 @@ export const RequestCibaoPlusScreen = () => {
       {/*======================
         MAIN CONTENT SECTION
       =========================*/}
-      <main className="flex flex-col p-6 gap-8 bg-white z-11 relative">
+      <section className="flex flex-col p-6 gap-8 bg-white z-11 relative">
 
-        <section className="flex flex-col gap-2">
+        {/*==========================================
+          REQUEST CIBAO PLUS TITLE AND DESCRIPTION
+        =============================================*/}
+        <article className="flex flex-col gap-2">
           <h1 className="font-aleo text-2xl font-semibold text-gray-800">
             Solicita tu <span className="font-aleo text-primary font-semibold">CibaoPlus</span>
           </h1>
           <p className="font-aleo text-[16px] text-gray-600 text-sm">
             Descubre todo lo que Cibao Plus tiene para ti
           </p>
-        </section>
+        </article>
 
-        <section className="flex flex-col gap-4">
+        {/*========================================
+          CEDULA INPUT AND AUTHORIZATION SECTION
+        ===========================================*/}
+        <article className="flex flex-col gap-4">
 
-          <div className="mb-4">
+          {/*====================
+            CEDULA INPUT FIELD
+          =======================*/}
+          <section className="mb-4">
             <label htmlFor="cedula-input" className="block text-gray-700 text-sm mb-2">
               Ingresa tu Cédula asociada a tu cuenta CIBAO
             </label>
@@ -86,9 +96,12 @@ export const RequestCibaoPlusScreen = () => {
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
               />
             </div>
-          </div>
+          </section>
 
-          <div className="mb-6">
+          {/*========================
+            AUTHORIZATION CHECKBOX
+          ===========================*/}
+          <section className="mb-6">
             <label className="flex items-start space-x-3">
               <input
                 checked={authorize}
@@ -100,8 +113,11 @@ export const RequestCibaoPlusScreen = () => {
                 Autorizo el uso de mis datos personales para la evaluación y gestión de mi solicitud.
               </span>
             </label>
-          </div>
+          </section>
 
+          {/*=================
+            VALIDATE BUTTON
+          ====================*/}
           <Link
             to={`/welcome`}
             className={(isCedulaComplete && authorize) ? '' : 'pointer-events-none opacity-50'}
@@ -123,16 +139,16 @@ export const RequestCibaoPlusScreen = () => {
             </button>
           </Link>
 
-        </section>
+        </article>
 
-        <footer className="flex flex-col gap-2 mt-12 text-center text-xs text-gray-500">
-          <p>Asociación Cibao de Ahorros y Préstamos © 2026</p>
-          <p>Políticas de Privacidad | Entidad Autorizada SB</p>
-        </footer>
+        {/*================
+          FOOTER SECTION
+        ===================*/}
+        <Footer />
 
-      </main>
+      </section>
 
-    </div>
+    </main>
 
   )
 
