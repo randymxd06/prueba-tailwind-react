@@ -4,15 +4,16 @@ import { useState } from 'react';
 
 export const RequestCibaoPlusScreen = () => {
 
+  const [authorize, setAuthorize] = useState(false);
   const [cedula, setCedula] = useState('');
 
   const formatCedula = (value: string) => {
     // Remover todos los caracteres no numéricos
     const numbers = value.replace(/\D/g, '');
-    
+
     // Limitar a 11 dígitos
     const limited = numbers.slice(0, 11);
-    
+
     // Aplicar formato XXX-XXXXXXX-X
     if (limited.length <= 3) {
       return limited;
@@ -27,6 +28,9 @@ export const RequestCibaoPlusScreen = () => {
     const formattedValue = formatCedula(e.target.value);
     setCedula(formattedValue);
   };
+
+  // Verificar si la cédula está completa (11 dígitos)
+  const isCedulaComplete = cedula.replaceAll(/\D/g, '').length === 11;
 
   return (
 
@@ -101,6 +105,8 @@ export const RequestCibaoPlusScreen = () => {
           <div className="mb-6">
             <label className="flex items-start space-x-3">
               <input
+                checked={authorize}
+                onChange={() => setAuthorize(!authorize)}
                 type="checkbox"
                 className="mt-1 h-4 w-4 text-primary focus:ring-blue-500 border-gray-300 rounded"
               />
@@ -110,8 +116,20 @@ export const RequestCibaoPlusScreen = () => {
             </label>
           </div>
 
-          <Link to={`/welcome`}>
-            <button className="w-full bg-primary hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2">
+          <Link
+            to={`/welcome`}
+            className={(isCedulaComplete && authorize) ? '' : 'pointer-events-none opacity-50'}
+          >
+            <button
+              className={`
+                w-full font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2
+                ${(isCedulaComplete && authorize)
+                  ? 'bg-primary hover:bg-blue-700 text-white'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }
+              `}
+              disabled={!isCedulaComplete}
+            >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
