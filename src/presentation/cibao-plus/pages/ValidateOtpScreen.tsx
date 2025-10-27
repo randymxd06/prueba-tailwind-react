@@ -2,9 +2,12 @@ import { Link } from 'react-router';
 import { StepperHeader } from '../components/StepperHeader';
 import { useState, useRef } from 'react';
 import Banner from "../assets/Banner.png"
+import { Footer } from '../components/Footer';
 
 export const ValidateOtpScreen = () => {
+
   const [otp, setOtp] = useState(['', '', '', '']);
+
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -12,28 +15,39 @@ export const ValidateOtpScreen = () => {
     useRef<HTMLInputElement>(null)
   ];
 
-  const handleOtpChange = (index: number, value: string) => {
-    // Solo permitir números
+  const handleOtpChange = (index: number, value: string): void => {
+
+    /**=====================
+     * ALLOW NUMBERS ONLY
+    ========================*/
     if (!/^\d*$/.test(value)) return;
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Mover al siguiente input si se ingresó un dígito
+    /**================================================
+     * MOVE TO THE NEXT INPUT IF A DIGIT WAS ENTERED
+    ===================================================*/
     if (value && index < 3) {
       inputRefs[index + 1].current?.focus();
     }
+
   };
 
-  const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
-    // Mover al input anterior con backspace si el campo actual está vacío
+  const handleKeyDown = (index: number, e: React.KeyboardEvent): void => {
+
+    /**==========================================================================
+     * MOVE TO THE PREVIOUS INPUT WITH BACKSPACE IF THE CURRENT FIELD IS EMPTY
+    =============================================================================*/
     if (e.key === 'Backspace' && !otp[index] && index > 0) {
       inputRefs[index - 1].current?.focus();
     }
+
   };
 
-  const handlePaste = (e: React.ClipboardEvent) => {
+  const handlePaste = (e: React.ClipboardEvent): void => {
+
     e.preventDefault();
     const pastedData = e.clipboardData.getData('text').replaceAll(/\D/g, '');
     const newOtp = [...otp];
@@ -44,39 +58,54 @@ export const ValidateOtpScreen = () => {
 
     setOtp(newOtp);
 
-    // Enfocar el último input con valor o el siguiente vacío
+    /**===========================================================
+     * FOCUS ON THE LAST INPUT WITH VALUE OR THE NEXT EMPTY ONE
+    ==============================================================*/
     const lastFilledIndex = Math.min(3, pastedData.length - 1);
     inputRefs[lastFilledIndex].current?.focus();
+
   };
 
   const isComplete = otp.every(digit => digit !== '');
 
   const handleResend = () => {
-    // Lógica para reenviar código
     console.log('Reenviando código...');
   };
 
   return (
-    <div className="min-h-screen bg-white">
 
-      <section>
+    <main className="min-h-screen bg-white">
+
+      {/*================
+        HEADER SECTION
+      ===================*/}
+      <header>
         <img className='w-full h-auto object-cover' src={Banner} alt="banner" />
-      </section>
+      </header>
 
-      <main className="flex flex-col p-6 gap-8 bg-white relative">
+      {/*======================
+        MAIN CONTENT SECTION
+      =========================*/}
+      <section className="flex flex-col p-6 gap-8 bg-white relative">
         
+        {/*================
+          STEPPER HEADER
+        ===================*/}
         <StepperHeader />
 
-        <section className="flex flex-col gap-2">
+        {/*===============================
+          TITLE AND DESCRIPTION SECTION
+        ==================================*/}
+        <article className="flex flex-col gap-2">
           <h1 className="font-aleo text-2xl font-semibold text-gray-800">
             Valida tu Código
           </h1>
           <p className="font-aleo text-[16px] text-gray-600">
             Ingresa el código de 4 dígitos que hemos enviado a tu correo j****@****.com
           </p>
-        </section>
+        </article>
 
-        <section className="flex flex-col gap-6">
+        <article className="flex flex-col gap-6">
 
           {/* Campos OTP */}
           <div className="flex justify-center gap-3">
@@ -139,10 +168,10 @@ export const ValidateOtpScreen = () => {
             </p>
           </div>
 
-        </section>
+        </article>
 
         {/* Botones de navegación */}
-        <div className="flex gap-3 mt-8">
+        <article className="flex gap-3 mt-8">
           <Link to="/welcome" className="flex-1">
             <button className="w-full border border-primary text-primary hover:bg-blue-50 font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2">
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,15 +201,16 @@ export const ValidateOtpScreen = () => {
               </svg>
             </button>
           </Link>
-        </div>
+        </article>
 
-        <footer className="flex flex-col gap-2 mt-12 text-center text-xs text-gray-500">
-          <p>Asociación Cibao de Ahorros y Préstamos © 2026</p>
-          <p>Políticas de Privacidad | Entidad Autorizada SB</p>
-        </footer>
+        {/*================
+          FOOTER SECTION
+        ===================*/}
+        <Footer />
 
-      </main>
+      </section>
 
-    </div>
+    </main>
+
   );
 };
