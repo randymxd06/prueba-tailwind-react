@@ -1,35 +1,21 @@
 import { Link } from 'react-router';
 import devicesImage from '../assets/Devices.png';
 import { useState } from 'react';
+import { formatCedula } from '../../helpers/formatCedula';
 
 export const RequestCibaoPlusScreen = () => {
 
   const [authorize, setAuthorize] = useState(false);
   const [cedula, setCedula] = useState('');
 
-  const formatCedula = (value: string) => {
-    // Remover todos los caracteres no numéricos
-    const numbers = value.replace(/\D/g, '');
-
-    // Limitar a 11 dígitos
-    const limited = numbers.slice(0, 11);
-
-    // Aplicar formato XXX-XXXXXXX-X
-    if (limited.length <= 3) {
-      return limited;
-    } else if (limited.length <= 10) {
-      return `${limited.slice(0, 3)}-${limited.slice(3)}`;
-    } else {
-      return `${limited.slice(0, 3)}-${limited.slice(3, 10)}-${limited.slice(10)}`;
-    }
-  };
-
   const handleCedulaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formattedValue = formatCedula(e.target.value);
     setCedula(formattedValue);
   };
 
-  // Verificar si la cédula está completa (11 dígitos)
+  /**====================================================
+   * VERIFY THAT THE ID NUMBER IS COMPLETE (11 DIGITS)
+  =======================================================*/
   const isCedulaComplete = cedula.replaceAll(/\D/g, '').length === 11;
 
   return (
