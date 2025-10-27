@@ -1,13 +1,15 @@
 import { Link } from "react-router";
 
 export const CongratulationsScreen = () => {
+
   return (
+
     <div className="min-h-screen bg-gray-100 flex flex-col">
 
       <main className="flex-1 flex flex-col items-center justify-center p-6">
 
         <div className="mb-8">
-          <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center">
+          <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center">
             <svg
               className="w-10 h-10 text-white"
               fill="none"
@@ -36,7 +38,7 @@ export const CongratulationsScreen = () => {
 
         <div className="mb-12">
           <div className="relative">
-            <div className="w-72 h-44 bg-linear-to-r from-blue-600 to-blue-800 rounded-xl shadow-lg relative overflow-hidden">
+            <div className="w-72 h-44 bg-linear-to-r from-blue-600 to-primary rounded-xl shadow-lg relative overflow-hidden">
 
               <div className="absolute top-6 left-6">
                 <span className="text-white font-bold text-lg">Cibao.</span>
@@ -72,7 +74,7 @@ export const CongratulationsScreen = () => {
 
       <div className="p-6">
         <Link to="/contact-employment-details">
-          <button className="w-full bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-4 px-6 rounded-xl transition duration-200 shadow-sm">
+          <button className="w-full text-white bg-primary hover:bg-blue-700 font-medium py-4 px-6 rounded-xl transition duration-200 shadow-sm">
             Continuar
           </button>
         </Link>
