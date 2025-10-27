@@ -1,17 +1,22 @@
 import { Link } from 'react-router';
 import { StepperHeader } from '../components/StepperHeader';
 import { useState } from 'react';
+import Banner from "../assets/Banner.png"
 
 export const WelcomeScreen = () => {
   const [selectedMethod, setSelectedMethod] = useState<'sms' | 'email' | null>(null);
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header con Stepper */}
-      <StepperHeader />
 
-      {/* Contenido Principal */}
+    <div className="min-h-screen bg-white">
+
+      <section>
+        <img className='w-full h-auto object-cover' src={Banner} alt="banner" />
+      </section>
+
       <main className="flex flex-col p-6 gap-8 bg-white relative">
+
+        <StepperHeader />
 
         <section className="flex flex-col gap-2">
           <h1 className="font-aleo text-2xl font-semibold text-gray-800">
@@ -24,7 +29,6 @@ export const WelcomeScreen = () => {
 
         <section className="flex flex-col gap-4">
 
-          {/* Opción SMS */}
           <button
             className={`
               border rounded-lg p-4 cursor-pointer transition-all duration-200 w-full text-left
@@ -58,7 +62,6 @@ export const WelcomeScreen = () => {
             </div>
           </button>
 
-          {/* Opción Correo Electrónico */}
           <button
             className={`
               border rounded-lg p-4 cursor-pointer transition-all duration-200 w-full text-left
@@ -94,7 +97,6 @@ export const WelcomeScreen = () => {
 
         </section>
 
-        {/* Botones de navegación */}
         <div className="flex gap-3 mt-8">
           <Link to="/" className="flex-1">
             <button className="w-full border border-primary text-primary hover:bg-blue-50 font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2">
