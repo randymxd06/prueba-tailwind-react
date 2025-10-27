@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { StepperHeader } from '../components/StepperHeader';
 import { useState, useRef } from 'react';
+import Banner from "../assets/Banner.png"
 
 export const ValidateOtpScreen = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
@@ -57,11 +58,14 @@ export const ValidateOtpScreen = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header con Stepper */}
-      <StepperHeader />
 
-      {/* Contenido Principal */}
+      <section>
+        <img className='w-full h-auto object-cover' src={Banner} alt="banner" />
+      </section>
+
       <main className="flex flex-col p-6 gap-8 bg-white relative">
+        
+        <StepperHeader />
 
         <section className="flex flex-col gap-2">
           <h1 className="font-aleo text-2xl font-semibold text-gray-800">

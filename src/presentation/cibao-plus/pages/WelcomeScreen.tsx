@@ -14,7 +14,7 @@ export const WelcomeScreen = () => {
         <img className='w-full h-auto object-cover' src={Banner} alt="banner" />
       </section>
 
-      <main className="flex flex-col p-6 gap-8 bg-white relative">
+      <main className="flex flex-col p-6 gap-8 bg-white">
 
         <StepperHeader />
 

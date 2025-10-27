@@ -26,28 +26,20 @@ export const StepperHeader: React.FC = () => {
     const currentStep = getCurrentStep();
 
     return (
-        <div className="">
-            <div className="">
-
-                {/* Contenedor de las líneas de progreso */}
-                <div className="flex items-center justify-between gap-2">
-                    {steps.map((step) => (
-                        <div key={step.id} className="flex-1">
-                            {/* Línea individual para cada step */}
-                            <div
-                                className={`
-                                    h-1 rounded-full transition-all duration-500 ease-in-out
+        <section className="flex items-center justify-between gap-[15px]">
+            {steps.map((step) => (
+                <div key={step.id} className="flex-1">
+                    <div
+                        className={`
+                                    h-1.5 rounded-full transition-all duration-500 ease-in-out
                                     ${step.id <= currentStep
-                                        ? 'bg-blue-600'
-                                        : 'bg-gray-300'
-                                    }
+                                ? 'bg-primary'
+                                : 'bg-gray-300'
+                            }
                                 `}
-                            ></div>
-                        </div>
-                    ))}
+                    ></div>
                 </div>
-
-            </div>
-        </div>
+            ))}
+        </section>
     );
 };

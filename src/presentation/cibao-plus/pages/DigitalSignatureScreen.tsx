@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { StepperHeader } from '../components/StepperHeader';
 import { useState } from 'react';
+import Banner from "../assets/Banner.png"
 
 export const DigitalSignatureScreen = () => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
@@ -17,10 +18,16 @@ export const DigitalSignatureScreen = () => {
   const canContinue = acceptedTerms;
 
   return (
+
     <div className="min-h-screen bg-white">
-      <StepperHeader />
+
+      <section>
+        <img className='w-full h-auto object-cover' src={Banner} alt="banner" />
+      </section>
 
       <main className="flex flex-col p-6 gap-8 bg-white relative">
+        
+        <StepperHeader />
 
         <section className="flex flex-col gap-2">
           <h1 className="font-aleo text-2xl font-semibold text-gray-800">
@@ -51,7 +58,11 @@ export const DigitalSignatureScreen = () => {
             ))}
           </div>
 
-          <div className="mt-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+        </section>
+
+        <div className="flex flex-col">
+
+          <section>
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -63,40 +74,42 @@ export const DigitalSignatureScreen = () => {
                 He leído y acepto los Términos y Condiciones
               </span>
             </label>
-          </div>
+          </section>
 
-        </section>
+          <section className='flex gap-3 mt-8'>
 
-        <div className="flex gap-3 mt-8">
-          <Link to="/validate-otp" className="flex-1">
-            <button className="w-full border border-primary text-primary hover:bg-blue-50 font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2">
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              <span>Regresar</span>
-            </button>
-          </Link>
+            <Link to="/validate-otp" className="flex-1">
+              <button className="w-full border border-primary text-primary hover:bg-blue-50 font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2">
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Regresar</span>
+              </button>
+            </Link>
 
-          <Link
-            to="/congratulations"
-            className={`flex-1 ${canContinue ? '' : 'pointer-events-none opacity-50'}`}
-          >
-            <button
-              className={`
-                w-full font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2
-                ${canContinue
-                  ? 'bg-primary hover:bg-blue-700 text-white'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                }
-              `}
-              disabled={!canContinue}
+            <Link
+              to="/congratulations"
+              className={`flex-1 ${canContinue ? '' : 'pointer-events-none opacity-50'}`}
             >
-              <span>Continuar</span>
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7" />
-              </svg>
-            </button>
-          </Link>
+              <button
+                className={`
+                  w-full font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2
+                  ${canContinue
+                    ? 'bg-primary hover:bg-blue-700 text-white'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }
+                `}
+                disabled={!canContinue}
+              >
+                <span>Continuar</span>
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7" />
+                </svg>
+              </button>
+            </Link>
+
+          </section>
+
         </div>
 
         <footer className="flex flex-col gap-2 mt-12 text-center text-xs text-gray-500">
